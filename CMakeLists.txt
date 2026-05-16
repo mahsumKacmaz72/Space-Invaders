@@ -21,7 +21,8 @@ find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
 
 add_executable(SpaceInvaders
     main.cpp
-)
+   
+   "include/oyuncu.hpp"  "src/oyuncu.cpp")
 
 target_link_libraries(SpaceInvaders PRIVATE
     SFML::Graphics
