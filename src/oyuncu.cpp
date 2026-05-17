@@ -5,12 +5,11 @@
 oyuncu::oyuncu():gemiResmi("C:\\Space Invaders\\assets\\images\\uzayGemisi2.png"),gemi(gemiResmi){
 	gemi.setPosition({ 750,1070 });
 	gemi.setScale({ 1.4f,1.25f });
-	gemiBoyutu = 140.f;
+	gemiBoyutu = 140.f;	
 }
 
-void oyuncu::ciz(sf::RenderWindow& pencere) {
-	pencere.draw(gemi);
-}
+
+
 
 void oyuncu::hareketEt() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left)){ 
@@ -22,4 +21,17 @@ void oyuncu::hareketEt() {
 		if(gemi.getPosition().x + gemiBoyutu <= 1600)
 			gemi.move({ 15.f, 0 });
 	}
+}
+
+
+
+sf::Vector2f oyuncu::gemiKonumu(){
+	return gemi.getPosition() + sf::Vector2f({gemiBoyutu/2 , 0.f});
+}
+
+
+
+
+void oyuncu::ciz(sf::RenderWindow& pencere) {
+	pencere.draw(gemi);
 }
