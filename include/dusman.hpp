@@ -9,10 +9,11 @@ class enemy {
 private:
 	sf::Texture dusmanResmi;
 	sf::Sprite dusman;
-
+	std::vector<sf::Sprite> dusmanSatiri;
 	
 public:
 	enemy();
 	
+	void dusmanSatirlari();
 	void ciz(sf::RenderWindow& pencere);
 };
