@@ -1,14 +1,22 @@
 #include <SFML/Graphics.hpp>
 #include "C:\\Space Invaders\\include\\oyuncu.hpp"
 #include "C:\\Space Invaders\\include\\mermi.hpp"
+#include "C:\\Space Invaders\\include\\dusman.hpp"
+
 
 
 int main(){
 	oyuncu gemi;
 	bullet mermi;
+	enemy dusman;
+
 	
-	sf::RenderWindow pencere(sf::VideoMode({ 1600, 1200 }), "Space Invaders");
-	pencere.setFramerateLimit(60);
+	
+	sf::RenderWindow pencere(sf::VideoMode::getDesktopMode(), "Space Invaders");
+	//pencere.setFramerateLimit(60);
+	pencere.setVerticalSyncEnabled(true);
+
+
 
 
 	while (pencere.isOpen()){
@@ -29,6 +37,7 @@ int main(){
 
 		pencere.clear(sf::Color::Black);
 
+		dusman.ciz(pencere);
 		mermi.ciz(pencere);
 		gemi.ciz(pencere);
 

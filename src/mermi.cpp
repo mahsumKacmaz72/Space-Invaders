@@ -1,7 +1,8 @@
 #include "C:\Space Invaders\include\mermi.hpp"
 
 bullet::bullet() :mermiResmi("C:\\Space Invaders\\assets\\images\\mermi1.png"), mermi(mermiResmi) {
-	mermi.setScale({ 0.8f, 1.f });
+	mermi.setScale({ 0.6f, 0.8f });
+	//mermi.setColor(sf::Color::Green);
 }
 
 void bullet::mermiAtesleme(sf::Vector2f gemiKonumu){
