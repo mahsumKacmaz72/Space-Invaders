@@ -11,7 +11,7 @@ void bullet::mermiAtesleme(sf::Vector2f gemiKonumu){
 		sf::Time simdikiZaman = zamanlayici.getElapsedTime();
 
 		if (simdikiZaman - sonAtesZamani >= atesEtmeAraligi) {
-			mermi.setPosition({gemiKonumu.x - 8.f , gemiKonumu.y});
+			mermi.setPosition({gemiKonumu.x-17.f , gemiKonumu.y});
 			sarjor.push_back(mermi);
 			sonAtesZamani = simdikiZaman;
 		}

@@ -3,9 +3,9 @@
 
 
 oyuncu::oyuncu():gemiResmi("C:\\Space Invaders\\assets\\images\\uzayGemisi2.png"),gemi(gemiResmi){
-	gemi.setPosition({ 550,1160});
-	gemi.setScale({ 1.19f,1 });
-	gemiBoyutu = 140.f;	
+	gemi.setPosition({ 550,1400});
+	gemi.setScale({ 1.13f,0.92f });
+	gemiBoyutu = 130.f;	
 }
 
 
@@ -18,7 +18,7 @@ void oyuncu::hareketEt() {
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right)){ 
-		if(gemi.getPosition().x + gemiBoyutu <= 1200)
+		if(gemi.getPosition().x + gemiBoyutu <= 1410)
 			gemi.move({ 10.f, 0 });
 	}
 }

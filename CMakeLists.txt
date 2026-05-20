@@ -25,7 +25,7 @@ add_executable(SpaceInvaders
     "include/oyuncu.hpp" "src/oyuncu.cpp"
     "include/mermi.hpp"  "src/mermi.cpp"
     "include/dusman.hpp"  "src/dusman.cpp" 
-    "include/colorManager.hpp"  "src/colorManager.cpp")
+    "include/colorManager.hpp"  "src/colorManager.cpp" )
 
 target_link_libraries(SpaceInvaders PRIVATE
     SFML::Graphics

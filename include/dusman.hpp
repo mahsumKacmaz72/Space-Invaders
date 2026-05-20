@@ -7,13 +7,14 @@
 
 class enemy {
 private:
+	int yon = 1;
 	sf::Texture dusmanResmi;
 	sf::Sprite dusman;
-	std::vector<sf::Sprite> dusmanSatiri;
-	
+	std::vector<sf::Sprite> dusmanlar;
+	float hiz = 5.f;
+	bool sagaGidiyorMu = true;
 public:
-	enemy();
-	
-	void dusmanSatirlari();
+	enemy(int dusmanSecici);
+	void dusmanHareketi();
 	void ciz(sf::RenderWindow& pencere);
 };
