@@ -2,35 +2,42 @@
 
 enemy::enemy(int dusmanSecici) : dusman(dusmanResmi) {
 
-    switch (dusmanSecici) {
-    case 1:
-        if (!dusmanResmi.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli1b.png"))
-            std::cout << "resim yuklenemedi";
-        dusman.setScale({ 0.121f, 0.166f });
-        break;
-    case 2:
-        if (!dusmanResmi.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli2b.png"))
-            std::cout << "resim yuklenemedi";
-        dusman.setScale({ 0.19f, 0.213f });
-        break;
-    case 3:
-        if (!dusmanResmi.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli3b.png"))
-            std::cout << "resim yuklenemedi";
-        dusman.setScale({ 0.197f, 0.227f });
-        break;
-    }
+    if (!dusmanResmi1.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli1b.png"))
+        std::cout << "resim yuklenemedi";
 
-    float b = 310;
-    for (int i = 0; i < 8; i++) {
-        dusmanlar.push_back(dusman);
-        dusmanlar[i].setPosition({ b, 10.f });
-        b += 100.f;
-    }
+    if (!dusmanResmi2.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli2b.png"))
+        std::cout << "resim yuklenemedi";
 
-    for (auto& d : dusmanlar) {
-        d.setTexture(dusmanResmi, true);
-    }
+    if (!dusmanResmi3.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli3b.png"))
+        std::cout << "resim yuklenemedi";
 
+    float y = 10.f;
+
+    for (int i = 0; i < 4; i++) {
+        float x = 310.f;
+
+        for (int j = 0; j < 8; j++) {
+            dusmanlar.push_back(dusman);
+
+            if (i == 0) {
+                dusmanlar.back().setTexture(dusmanResmi1, true);
+                dusmanlar.back().setScale({ 0.121f, 0.166f });
+            }
+            else if (i == 1) {
+                dusmanlar.back().setTexture(dusmanResmi2, true);
+                dusmanlar.back().setScale({ 0.19f, 0.213f });
+            }
+            else {
+                dusmanlar.back().setTexture(dusmanResmi3, true);
+                dusmanlar.back().setScale({ 0.197f, 0.227f });
+            }
+
+            dusmanlar.back().setPosition({ x, y });
+            x += 100.f;
+        }
+
+        y -= 100.f;
+    }
 }
 
 
