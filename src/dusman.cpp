@@ -1,6 +1,6 @@
 #include "C:\\Space Invaders\\include\\dusman.hpp"
 
-enemy::enemy(int dusmanSecici) : dusman(dusmanResmi) {
+enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiResmi) {
 
     if (!dusmanResmi1.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli1b.png"))
         std::cout << "resim yuklenemedi";
@@ -11,47 +11,68 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi) {
     if (!dusmanResmi3.loadFromFile("C:\\Space Invaders\\assets\\images\\uzayli3b.png"))
         std::cout << "resim yuklenemedi";
 
-    float y = 10.f;
+    if (!dusmanMermiResmi.loadFromFile("C:\\Space Invaders\\assets\\images\\mermi1.png"))
+        std::cout << "resim yuklenemedi";
 
-    for (int i = 0; i < 4; i++) {
+    dusmanMermisi.setTexture(dusmanMermiResmi, true);
+    dusmanMermisi.setScale({ 0.6f, 0.8f });
+	dusmanMermisi.setRotation(sf::degrees(180.f));
+
+    std::vector<sf::Color> renkler = {
+        sf::Color::Blue,
+        sf::Color::Red,
+        sf::Color::Green,
+        sf::Color(180, 0, 255),
+        sf::Color::White
+    };
+
+    int secilenRenk = rand() % static_cast<int>(renkler.size());
+    sf::Color dusmanRengi1 = renkler[secilenRenk];
+    renkler.erase(renkler.begin() + secilenRenk);
+
+    secilenRenk = rand() % static_cast<int>(renkler.size());
+    sf::Color dusmanRengi2 = renkler[secilenRenk];
+    renkler.erase(renkler.begin() + secilenRenk);
+
+    secilenRenk = rand() % static_cast<int>(renkler.size());
+    sf::Color dusmanRengi3 = renkler[secilenRenk];
+
+    float y = 150.f;
+    for (int i = 0; i < 5; i++) {
+
         float x = 310.f;
 
-        for (int j = 0; j < 8; j++) {
+        for (int j = 0; j < 11; j++) {
             dusmanlar.push_back(dusman);
 
             if (i == 0) {
                 dusmanlar.back().setTexture(dusmanResmi1, true);
-                dusmanlar.back().setScale({ 0.121f, 0.166f });
+                dusmanlar.back().setScale({ 0.120f, 0.165f });
+                dusmanlar.back().setColor(dusmanRengi1);
             }
-            else if (i == 1) {
+            else if (i == 1 || i == 2) {
                 dusmanlar.back().setTexture(dusmanResmi2, true);
-                dusmanlar.back().setScale({ 0.19f, 0.213f });
+                dusmanlar.back().setScale({ 0.189f, 0.212f });
+                dusmanlar.back().setColor(dusmanRengi2);
             }
             else {
                 dusmanlar.back().setTexture(dusmanResmi3, true);
-                dusmanlar.back().setScale({ 0.197f, 0.227f });
+                dusmanlar.back().setScale({ 0.196f, 0.226f });
+                dusmanlar.back().setColor(dusmanRengi3);
             }
 
             dusmanlar.back().setPosition({ x, y });
-            x += 100.f;
+            x += 110.f;
         }
-
-        y -= 100.f;
+        y += 105.f;
     }
 }
 
 
-
-
-
-
-
-
-
-
+//  HAREKET
 void enemy::dusmanHareketi(){
-    float solSinir = 10.f;
-    float sagSinir = 1400.f;
+    float solSinir = 5.f;
+    float sagSinir = 1795.f;
     bool asagiIn = false;
     
     for (auto& d : dusmanlar) {
@@ -71,24 +92,62 @@ void enemy::dusmanHareketi(){
     }
 
     for (auto& d : dusmanlar) {
-        if (asagiIn)
-            d.move({ 0.f,50.f });
+            if (asagiIn)
+                d.move({ 0.f,50.f });
        
-        if (sagaGidiyorMu)
-            d.move({ hiz, 0.f });
-        else
-            d.move({ -hiz, 0.f });
+            if (sagaGidiyorMu)
+                d.move({ hiz, 0.f });
+            else
+                d.move({ -hiz, 0.f });
+        
+    }
+    asagiIn = false;
+}
+
+// DUSMAN MERMİSİ
+
+void enemy::dusmanAtesi() {
+    sf::Time simdikiZaman = dusmanZamanlayici.getElapsedTime();
+
+    if (!dusmanlar.empty() && simdikiZaman - sonDusmanAtesZamani >= dusmanAtesEtmeAraligi) {
+        int rastgeleDusman = rand() % static_cast<int>(dusmanlar.size());
+
+        dusmanMermisi.setPosition({
+            dusmanlar[rastgeleDusman].getPosition().x + 45.f,
+            dusmanlar[rastgeleDusman].getPosition().y + 45.f
+        });
+
+        dusmanMermileri.push_back(dusmanMermisi);
+        sonDusmanAtesZamani = simdikiZaman;
+        dusmanAtesEtmeAraligi = sf::milliseconds(rand() % 1500 + 2000);
     }
 
-    asagiIn = false;
+    for (int i = 0; i < static_cast<int>(dusmanMermileri.size()); i++) {
+        dusmanMermileri[i].move({ 0.f, dusmanMermiHizi });
+
+        if (dusmanMermileri[i].getPosition().y >= 1600.f) {
+            dusmanMermileri.erase(dusmanMermileri.begin() + i);
+            i--;
+        }
+    }
 }
 
 
 
-
+// ÇİZİM
 void enemy::ciz(sf::RenderWindow& pencere) {
     for (const auto& d : dusmanlar) {
         pencere.draw(d);
     }
+
+    
 }
+
+void enemy::dusmanMermiCiz(sf::RenderWindow& pencere){
+    for (const auto& mermi : dusmanMermileri) {
+        pencere.draw(mermi);
+    }
+}
+
+
 

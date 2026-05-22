@@ -35,3 +35,4 @@ void bullet::ciz(sf::RenderWindow& pencere){
 		pencere.draw(mermi);
 	}
 }
+

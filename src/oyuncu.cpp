@@ -3,7 +3,7 @@
 
 
 oyuncu::oyuncu():gemiResmi("C:\\Space Invaders\\assets\\images\\uzayGemisi2.png"),gemi(gemiResmi){
-	gemi.setPosition({ 550,1400});
+	gemi.setPosition({ 850,1500});
 	gemi.setScale({ 1.13f,0.92f });
 	gemiBoyutu = 130.f;	
 }
