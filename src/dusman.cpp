@@ -110,14 +110,38 @@ void enemy::dusmanAtesi() {
     sf::Time simdikiZaman = dusmanZamanlayici.getElapsedTime();
 
     if (!dusmanlar.empty() && simdikiZaman - sonDusmanAtesZamani >= dusmanAtesEtmeAraligi) {
-        int rastgeleDusman = rand() % static_cast<int>(dusmanlar.size());
+        int atesEdenDusmanSayisi = rand() % 3 + 1;
+        std::vector<int> secilenDusmanlar;
 
-        dusmanMermisi.setPosition({
-            dusmanlar[rastgeleDusman].getPosition().x + 45.f,
-            dusmanlar[rastgeleDusman].getPosition().y + 45.f
-        });
+        if (atesEdenDusmanSayisi > static_cast<int>(dusmanlar.size()))
+            atesEdenDusmanSayisi = static_cast<int>(dusmanlar.size());
 
-        dusmanMermileri.push_back(dusmanMermisi);
+        for (int i = 0; i < atesEdenDusmanSayisi; i++) {
+            int rastgeleDusman;
+            bool ayniDusman;
+
+            do {
+                ayniDusman = false;
+                rastgeleDusman = rand() % static_cast<int>(dusmanlar.size());
+
+                for (const auto& secilenDusman : secilenDusmanlar) {
+                    if (secilenDusman == rastgeleDusman) {
+                        ayniDusman = true;
+                        break;
+                    }
+                }
+            } while (ayniDusman);
+
+            secilenDusmanlar.push_back(rastgeleDusman);
+
+            dusmanMermisi.setPosition({
+                dusmanlar[rastgeleDusman].getPosition().x + 45.f,
+                dusmanlar[rastgeleDusman].getPosition().y + 45.f
+            });
+
+            dusmanMermileri.push_back(dusmanMermisi);
+        }
+
         sonDusmanAtesZamani = simdikiZaman;
         dusmanAtesEtmeAraligi = sf::milliseconds(rand() % 1500 + 2000);
     }
