@@ -31,12 +31,16 @@ int main(){
 		}
 
 	
-		gemi.hareketEt();
-		mermi.mermiAtesleme(gemi.gemiKonumu());
+		if (gemi.hayattaMi()) {
+			gemi.hareketEt();
+			mermi.mermiAtesleme(gemi.gemiKonumu());
+		}
+
 		mermi.sarjorYenileme(gemi.gemiKonumu());
 		dusman.dusmanHareketi();
 		dusman.dusmanAtesi();
 		carpisma.oyuncuMermiDusmanCarpisma(dusman, mermi);
+		carpisma.dusmanMermiOyuncuCarpisma(dusman, gemi);
 		
 
 

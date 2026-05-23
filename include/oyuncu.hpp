@@ -5,11 +5,16 @@
 #include <filesystem>
 
 
+class carpismaDenetimi;
+
 class oyuncu {
 private:
+	friend class carpismaDenetimi;
+
 	sf::Texture		gemiResmi;
 	sf::Sprite		gemi;
 	float			gemiBoyutu;
+	bool			gemiSilindiMi = false;
 
 	
 public:
@@ -17,6 +22,7 @@ public:
 	oyuncu();
 
 	void hareketEt();
+	bool hayattaMi();
 	sf::Vector2f gemiKonumu();
 	void ciz(sf::RenderWindow& pencere);
 

@@ -12,3 +12,16 @@ void carpismaDenetimi::oyuncuMermiDusmanCarpisma(enemy& dusman, bullet& mermi){
 		}
 	}
 }
+
+void carpismaDenetimi::dusmanMermiOyuncuCarpisma(enemy& dusman, oyuncu& gemi) {
+	if (gemi.gemiSilindiMi)
+		return;
+
+	for (int i = 0; i < static_cast<int>(dusman.dusmanMermileri.size()); i++) {
+		if (dusman.dusmanMermileri[i].getGlobalBounds().findIntersection(gemi.gemi.getGlobalBounds())) {
+			dusman.dusmanMermileri.erase(dusman.dusmanMermileri.begin() + i);
+			gemi.gemiSilindiMi = true;
+			return;
+		}
+	}
+}
