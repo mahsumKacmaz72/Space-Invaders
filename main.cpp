@@ -2,6 +2,7 @@
 #include "C:\\Space Invaders\\include\\oyuncu.hpp"
 #include "C:\\Space Invaders\\include\\mermi.hpp"
 #include "C:\\Space Invaders\\include\\dusman.hpp"
+#include "C:\\Space Invaders\\include\\carpismaDenetimi.hpp"
 
 
 
@@ -12,6 +13,7 @@ int main(){
 	oyuncu gemi;
 	bullet mermi;
 	enemy dusman(a);
+	carpismaDenetimi carpisma;
 
 	
 	sf::RenderWindow pencere(sf::VideoMode({1800,1600}), "Space Invaders", sf::Style::Default);
@@ -34,6 +36,7 @@ int main(){
 		mermi.sarjorYenileme(gemi.gemiKonumu());
 		dusman.dusmanHareketi();
 		dusman.dusmanAtesi();
+		carpisma.oyuncuMermiDusmanCarpisma(dusman, mermi);
 		
 
 

@@ -18,19 +18,14 @@ void oyuncu::hareketEt() {
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right)){ 
-		if(gemi.getPosition().x + gemiBoyutu <= 1410)
+		if(gemi.getPosition().x + gemiBoyutu <= 1810)
 			gemi.move({ 10.f, 0 });
 	}
 }
 
-
-
 sf::Vector2f oyuncu::gemiKonumu(){
 	return gemi.getPosition() + sf::Vector2f({gemiBoyutu/2 , 0.f});
 }
-
-
-
 
 void oyuncu::ciz(sf::RenderWindow& pencere) {
 	pencere.draw(gemi);

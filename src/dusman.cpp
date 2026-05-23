@@ -15,7 +15,7 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiR
         std::cout << "resim yuklenemedi";
 
     dusmanMermisi.setTexture(dusmanMermiResmi, true);
-    dusmanMermisi.setScale({ 0.6f, 0.8f });
+    dusmanMermisi.setScale({ 0.8f, 1.f });
 	dusmanMermisi.setRotation(sf::degrees(180.f));
 
     std::vector<sf::Color> renkler = {

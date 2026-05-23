@@ -5,8 +5,12 @@
 #include <ctime>
 #include <vector>
 
+class carpismaDenetimi;
+
 class enemy {
 private:
+	friend class carpismaDenetimi;
+
 	sf::Texture					dusmanResmi;
 	sf::Texture					dusmanResmi1;
 	sf::Texture					dusmanResmi2;
@@ -19,7 +23,7 @@ private:
 
 	int							yon = 1;
 	float						hiz = 1.f;
-	float						dusmanMermiHizi = 12.f;
+	float						dusmanMermiHizi = 15.f;
 	bool						sagaGidiyorMu = true;
 	sf::Clock					dusmanZamanlayici;
 	sf::Time					dusmanAtesEtmeAraligi = sf::milliseconds(2000);
