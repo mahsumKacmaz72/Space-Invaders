@@ -3,6 +3,7 @@
 #include "C:\\Space Invaders\\include\\mermi.hpp"
 #include "C:\\Space Invaders\\include\\dusman.hpp"
 #include "C:\\Space Invaders\\include\\carpismaDenetimi.hpp"
+#include "C:\\Space Invaders\\include\\engel.hpp"
 
 
 
@@ -14,6 +15,7 @@ int main(){
 	bullet mermi;
 	enemy dusman(a);
 	carpismaDenetimi carpisma;
+	engel engeller;
 
 	
 	sf::RenderWindow pencere(sf::VideoMode({1800,1600}), "Space Invaders", sf::Style::Default);
@@ -40,6 +42,8 @@ int main(){
 		dusman.dusmanHareketi();
 		dusman.dusmanAtesi();
 		carpisma.oyuncuMermiDusmanCarpisma(dusman, mermi);
+		carpisma.oyuncuMermiEngelCarpisma(mermi, engeller);
+		carpisma.dusmanMermiEngelCarpisma(dusman, engeller);
 		carpisma.dusmanMermiOyuncuCarpisma(dusman, gemi);
 		
 
@@ -50,6 +54,7 @@ int main(){
 
 		dusman.dusmanMermiCiz(pencere);
 		dusman.ciz(pencere);
+		engeller.ciz(pencere);
 		mermi.ciz(pencere);
 		gemi.ciz(pencere);
 		

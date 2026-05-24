@@ -25,3 +25,21 @@ void carpismaDenetimi::dusmanMermiOyuncuCarpisma(enemy& dusman, oyuncu& gemi) {
 		}
 	}
 }
+
+void carpismaDenetimi::oyuncuMermiEngelCarpisma(bullet& mermi, engel& engeller) {
+	for (int i = 0; i < static_cast<int>(mermi.sarjor.size()); i++) {
+		if (engeller.mermiCarpincaHasarAl(mermi.sarjor[i].getGlobalBounds(), true)) {
+			mermi.sarjor.erase(mermi.sarjor.begin() + i);
+			i--;
+		}
+	}
+}
+
+void carpismaDenetimi::dusmanMermiEngelCarpisma(enemy& dusman, engel& engeller) {
+	for (int i = 0; i < static_cast<int>(dusman.dusmanMermileri.size()); i++) {
+		if (engeller.mermiCarpincaHasarAl(dusman.dusmanMermileri[i].getGlobalBounds(), false)) {
+			dusman.dusmanMermileri.erase(dusman.dusmanMermileri.begin() + i);
+			i--;
+		}
+	}
+}
