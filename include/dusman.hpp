@@ -6,6 +6,7 @@
 #include <vector>
 
 class carpismaDenetimi;
+class engel;
 
 class enemy {
 private:
@@ -22,17 +23,17 @@ private:
 	std::vector<sf::Sprite>		dusmanMermileri;
 
 	int							yon = 1;
-	float						hiz = 1.f;
+	float						hiz = 15.f;
 	float						dusmanMermiHizi = 15.f;
 	bool						sagaGidiyorMu = true;
 	sf::Clock					dusmanZamanlayici;
-	sf::Time					dusmanAtesEtmeAraligi = sf::milliseconds(2000);
+	sf::Time					dusmanAtesEtmeAraligi = sf::milliseconds(0.1f);
 	sf::Time					sonDusmanAtesZamani = sf::Time::Zero;
 
 
 public:
 	enemy(int dusmanSecici);
-	void dusmanHareketi();
+	void dusmanHareketi(engel& engeller);
 	void dusmanAtesi();
 	void ciz(sf::RenderWindow& pencere);
 	void dusmanMermiCiz(sf::RenderWindow& pencere);

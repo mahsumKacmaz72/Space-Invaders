@@ -1,4 +1,5 @@
 #include "C:\\Space Invaders\\include\\dusman.hpp"
+#include "C:\\Space Invaders\\include\\engel.hpp"
 
 enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiResmi) {
 
@@ -70,10 +71,12 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiR
 
 
 //  HAREKET
-void enemy::dusmanHareketi(){
+void enemy::dusmanHareketi(engel& engeller){
     float solSinir = 5.f;
     float sagSinir = 1795.f;
+    float asagiMiktari = 50.f;
     bool asagiIn = false;
+    bool asagiInmeEngellendi = false;
     
     for (auto& d : dusmanlar) {
         float x = d.getPosition().x;
@@ -91,9 +94,18 @@ void enemy::dusmanHareketi(){
         }
     }
 
+    if (asagiIn) {
+        for (const auto& d : dusmanlar) {
+            if (engeller.dusmanAsagiInerseCarpisir(d.getGlobalBounds(), asagiMiktari)) {
+                asagiInmeEngellendi = true;
+                break;
+            }
+        }
+    }
+
     for (auto& d : dusmanlar) {
-            if (asagiIn)
-                d.move({ 0.f,50.f });
+            if (asagiIn && !asagiInmeEngellendi)
+                d.move({ 0.f, asagiMiktari });
        
             if (sagaGidiyorMu)
                 d.move({ hiz, 0.f });
@@ -110,7 +122,7 @@ void enemy::dusmanAtesi() {
     sf::Time simdikiZaman = dusmanZamanlayici.getElapsedTime();
 
     if (!dusmanlar.empty() && simdikiZaman - sonDusmanAtesZamani >= dusmanAtesEtmeAraligi) {
-        int atesEdenDusmanSayisi = rand() % 3 + 1;
+        int atesEdenDusmanSayisi = rand() % 100 + 31;
         std::vector<int> secilenDusmanlar;
 
         if (atesEdenDusmanSayisi > static_cast<int>(dusmanlar.size()))

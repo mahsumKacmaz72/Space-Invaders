@@ -39,7 +39,7 @@ int main(){
 		}
 
 		mermi.sarjorYenileme(gemi.gemiKonumu());
-		dusman.dusmanHareketi();
+		dusman.dusmanHareketi(engeller);
 		dusman.dusmanAtesi();
 		carpisma.oyuncuMermiDusmanCarpisma(dusman, mermi);
 		carpisma.oyuncuMermiEngelCarpisma(mermi, engeller);

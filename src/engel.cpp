@@ -76,6 +76,21 @@ bool engel::mermiCarpincaHasarAl(sf::FloatRect mermiSinirlari, bool oyuncuMermis
 	return true;
 }
 
+bool engel::dusmanAsagiInerseCarpisir(sf::FloatRect dusmanSinirlari, float asagiMiktari) {
+	if (engelParcalari.empty())
+		return false;
+
+	float enUstEngelY = engelParcalari[0].getGlobalBounds().position.y;
+	for (const auto& parca : engelParcalari) {
+		float parcaY = parca.getGlobalBounds().position.y;
+		if (parcaY < enUstEngelY)
+			enUstEngelY = parcaY;
+	}
+
+	float dusmanAltY = dusmanSinirlari.position.y + dusmanSinirlari.size.y;
+	return dusmanAltY + asagiMiktari >= enUstEngelY;
+}
+
 void engel::ciz(sf::RenderWindow& pencere) {
 	for (const auto& parca : engelParcalari) {
 		pencere.draw(parca);
