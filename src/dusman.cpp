@@ -67,11 +67,30 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiR
         }
         y += 105.f;
     }
+
+    baslangicDusmanSayisi = static_cast<int>(dusmanlar.size());
+}
+
+
+void enemy::hizGuncelle() {
+    if (baslangicDusmanSayisi == 0 || dusmanlar.empty()) {
+        hiz = baslangicHizi;
+        return;
+    }
+
+    int silinenDusmanSayisi = baslangicDusmanSayisi - static_cast<int>(dusmanlar.size());
+    float hizArtisi = static_cast<float>(silinenDusmanSayisi) * 0.30f;
+    hiz = baslangicHizi + hizArtisi;
+
+    if (hiz > maksimumHiz)
+        hiz = maksimumHiz;
 }
 
 
 //  HAREKET
 void enemy::dusmanHareketi(engel& engeller){
+    hizGuncelle();
+
     float solSinir = 5.f;
     float sagSinir = 1795.f;
     float asagiMiktari = 50.f;
@@ -122,7 +141,7 @@ void enemy::dusmanAtesi() {
     sf::Time simdikiZaman = dusmanZamanlayici.getElapsedTime();
 
     if (!dusmanlar.empty() && simdikiZaman - sonDusmanAtesZamani >= dusmanAtesEtmeAraligi) {
-        int atesEdenDusmanSayisi = rand() % 100 + 31;
+        int atesEdenDusmanSayisi = rand() % 3 + 1;
         std::vector<int> secilenDusmanlar;
 
         if (atesEdenDusmanSayisi > static_cast<int>(dusmanlar.size()))
