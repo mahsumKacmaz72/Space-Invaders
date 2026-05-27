@@ -50,16 +50,19 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiR
                 dusmanlar.back().setTexture(dusmanResmi1, true);
                 dusmanlar.back().setScale({ 0.120f, 0.165f });
                 dusmanlar.back().setColor(dusmanRengi1);
+                dusmanPuanlari.push_back(150);
             }
             else if (i == 1 || i == 2) {
                 dusmanlar.back().setTexture(dusmanResmi2, true);
                 dusmanlar.back().setScale({ 0.189f, 0.212f });
                 dusmanlar.back().setColor(dusmanRengi2);
+                dusmanPuanlari.push_back(100);
             }
             else {
                 dusmanlar.back().setTexture(dusmanResmi3, true);
                 dusmanlar.back().setScale({ 0.196f, 0.226f });
                 dusmanlar.back().setColor(dusmanRengi3);
+                dusmanPuanlari.push_back(50);
             }
 
             dusmanlar.back().setPosition({ x, y });

@@ -21,6 +21,7 @@ private:
 	sf::Sprite					dusmanMermisi;
 	std::vector<sf::Sprite>		dusmanlar;
 	std::vector<sf::Sprite>		dusmanMermileri;
+	std::vector<int>			dusmanPuanlari;
 
 	int							yon = 1;
 	int							baslangicDusmanSayisi = 0;

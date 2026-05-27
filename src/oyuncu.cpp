@@ -3,8 +3,8 @@
 
 
 oyuncu::oyuncu():gemiResmi("C:\\Space Invaders\\assets\\images\\uzayGemisi2.png"),gemi(gemiResmi){
-	gemi.setPosition({ 850,1500});
-	gemi.setScale({ 1.13f,0.92f });
+	gemi.setPosition({ 850,1475});
+	gemi.setScale({ 0.15, 0.15f });
 	gemiBoyutu = 130.f;	
 }
 
@@ -12,7 +12,7 @@ oyuncu::oyuncu():gemiResmi("C:\\Space Invaders\\assets\\images\\uzayGemisi2.png"
 
 
 void oyuncu::hareketEt() {
-	if (gemiSilindiMi)
+	if (gemiSilindiMi || gemiGeciciGizliMi)
 		return;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left)){ 
@@ -26,8 +26,34 @@ void oyuncu::hareketEt() {
 	}
 }
 
+void oyuncu::hasarAl() {
+	if (gemiSilindiMi || gemiGeciciGizliMi)
+		return;
+
+	can--;
+
+	if (can <= 0) {
+		can = 0;
+		gemiSilindiMi = true;
+		gemiGeciciGizliMi = false;
+	}
+	else {
+		gemiGeciciGizliMi = true;
+		gizlenmeZamanlayici.restart();
+	}
+}
+
+void oyuncu::guncelle() {
+	if (gemiGeciciGizliMi && gizlenmeZamanlayici.getElapsedTime() >= gizlenmeSuresi)
+		gemiGeciciGizliMi = false;
+}
+
 bool oyuncu::hayattaMi() {
-	return !gemiSilindiMi;
+	return !gemiSilindiMi && !gemiGeciciGizliMi;
+}
+
+int oyuncu::canSayisi() {
+	return can;
 }
 
 sf::Vector2f oyuncu::gemiKonumu(){
@@ -35,6 +61,6 @@ sf::Vector2f oyuncu::gemiKonumu(){
 }
 
 void oyuncu::ciz(sf::RenderWindow& pencere) {
-	if (!gemiSilindiMi)
+	if (!gemiSilindiMi && !gemiGeciciGizliMi)
 		pencere.draw(gemi);
 }
