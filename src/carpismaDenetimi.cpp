@@ -3,6 +3,9 @@
 int carpismaDenetimi::oyuncuMermiDusmanCarpisma(enemy& dusman, bullet& mermi){
 	int kazanilanPuan = 0;
 
+	if (dusman.dalgaIniyorMu)
+		return kazanilanPuan;
+
 	for (int i = 0; i < static_cast<int>(dusman.dusmanlar.size()); i++) {
 		for (int j = 0; j < static_cast<int>(mermi.sarjor.size()); j++) {
 			if (mermi.sarjor[j].getGlobalBounds().findIntersection(dusman.dusmanlar[i].getGlobalBounds())) {

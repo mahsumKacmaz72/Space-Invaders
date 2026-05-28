@@ -19,6 +19,16 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiR
     dusmanMermisi.setScale({ 0.8f, 1.f });
 	dusmanMermisi.setRotation(sf::degrees(180.f));
 
+    dusmanlariOlustur(0.f);
+}
+
+
+void enemy::dusmanlariOlustur(float yBaslangicFarki) {
+    dusmanlar.clear();
+    dusmanMermileri.clear();
+    dusmanPuanlari.clear();
+    dusmanHedefKonumlari.clear();
+
     std::vector<sf::Color> renkler = {
         sf::Color::Blue,
         sf::Color::Red,
@@ -65,13 +75,52 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiR
                 dusmanPuanlari.push_back(50);
             }
 
-            dusmanlar.back().setPosition({ x, y });
+            dusmanlar.back().setPosition({ x, y + yBaslangicFarki });
+            dusmanHedefKonumlari.push_back({ x, y });
             x += 110.f;
         }
         y += 105.f;
     }
 
     baslangicDusmanSayisi = static_cast<int>(dusmanlar.size());
+}
+
+
+void enemy::yeniDalgaBaslat() {
+    baslangicHizi += 1.f;
+
+    if (baslangicHizi > maksimumHiz)
+        baslangicHizi = maksimumHiz;
+
+    hiz = baslangicHizi;
+    sagaGidiyorMu = true;
+    sonDusmanAtesZamani = dusmanZamanlayici.getElapsedTime();
+    dusmanlariOlustur(-650.f);
+    dalgaIniyorMu = true;
+}
+
+
+void enemy::dalgaInisiniGuncelle() {
+    bool hedefeUlastiMi = true;
+
+    for (int i = 0; i < static_cast<int>(dusmanlar.size()); i++) {
+        sf::Vector2f konum = dusmanlar[i].getPosition();
+
+        if (konum.y < dusmanHedefKonumlari[i].y) {
+            konum.y += dalgaInisHizi;
+
+            if (konum.y > dusmanHedefKonumlari[i].y)
+                konum.y = dusmanHedefKonumlari[i].y;
+
+            dusmanlar[i].setPosition(konum);
+        }
+
+        if (dusmanlar[i].getPosition().y < dusmanHedefKonumlari[i].y)
+            hedefeUlastiMi = false;
+    }
+
+    if (hedefeUlastiMi)
+        dalgaIniyorMu = false;
 }
 
 
@@ -92,6 +141,15 @@ void enemy::hizGuncelle() {
 
 //  HAREKET
 void enemy::dusmanHareketi(engel& engeller){
+    if (dusmanlar.empty()) {
+        yeniDalgaBaslat();
+    }
+
+    if (dalgaIniyorMu) {
+        dalgaInisiniGuncelle();
+        return;
+    }
+
     hizGuncelle();
 
     float solSinir = 5.f;
@@ -141,6 +199,9 @@ void enemy::dusmanHareketi(engel& engeller){
 // DUSMAN MERMİSİ
 
 void enemy::dusmanAtesi() {
+    if (dalgaIniyorMu)
+        return;
+
     sf::Time simdikiZaman = dusmanZamanlayici.getElapsedTime();
 
     if (!dusmanlar.empty() && simdikiZaman - sonDusmanAtesZamani >= dusmanAtesEtmeAraligi) {

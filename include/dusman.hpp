@@ -22,18 +22,24 @@ private:
 	std::vector<sf::Sprite>		dusmanlar;
 	std::vector<sf::Sprite>		dusmanMermileri;
 	std::vector<int>			dusmanPuanlari;
+	std::vector<sf::Vector2f>	dusmanHedefKonumlari;
 
 	int							yon = 1;
 	int							baslangicDusmanSayisi = 0;
 	float						baslangicHizi = 1.f;
 	float						hiz = 1.f;
-	float						maksimumHiz = 10.f;
+	float						maksimumHiz = 5.f;
 	float						dusmanMermiHizi = 15.f;
+	float						dalgaInisHizi = 8.f;
 	bool						sagaGidiyorMu = true;
+	bool						dalgaIniyorMu = false;
 	sf::Clock					dusmanZamanlayici;
 	sf::Time					dusmanAtesEtmeAraligi = sf::milliseconds(2000);
 	sf::Time					sonDusmanAtesZamani = sf::Time::Zero;
 
+	void dusmanlariOlustur(float yBaslangicFarki);
+	void yeniDalgaBaslat();
+	void dalgaInisiniGuncelle();
 
 public:
 	enemy(int dusmanSecici);

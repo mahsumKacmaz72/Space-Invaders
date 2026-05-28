@@ -23,6 +23,5 @@ public:
 	void sarjorYenileme(sf::Vector2f gemiKonumu);
 	void ciz(sf::RenderWindow& pencere);
 
-	void dusmanAtesi();
 
 };
