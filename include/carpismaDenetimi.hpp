@@ -7,7 +7,7 @@
 class carpismaDenetimi {
 public:
 	int oyuncuMermiDusmanCarpisma(enemy& dusman, bullet& mermi);
-	void dusmanMermiOyuncuCarpisma(enemy& dusman, oyuncu& gemi);
-	void oyuncuMermiEngelCarpisma(bullet& mermi, engel& engeller);
-	void dusmanMermiEngelCarpisma(enemy& dusman, engel& engeller);
+	bool dusmanMermiOyuncuCarpisma(enemy& dusman, oyuncu& gemi);
+	bool oyuncuMermiEngelCarpisma(bullet& mermi, engel& engeller);
+	bool dusmanMermiEngelCarpisma(enemy& dusman, engel& engeller);
 };

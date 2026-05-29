@@ -9,7 +9,7 @@ class carpismaDenetimi;
 
 class oyuncu {
 private:
-	friend class carpismaDenetimi;
+	friend class	carpismaDenetimi;
 
 	sf::Texture		gemiResmi;
 	sf::Sprite		gemi;
@@ -25,6 +25,7 @@ public:
 
 	oyuncu();
 
+	void sifirla();
 	void hareketEt();
 	void hasarAl();
 	void guncelle();

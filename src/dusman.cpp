@@ -22,6 +22,16 @@ enemy::enemy(int dusmanSecici) : dusman(dusmanResmi), dusmanMermisi(dusmanMermiR
     dusmanlariOlustur(0.f);
 }
 
+void enemy::sifirla(bool yukaridanBaslasin) {
+    baslangicHizi = 1.f;
+    hiz = baslangicHizi;
+    sagaGidiyorMu = true;
+    dalgaIniyorMu = yukaridanBaslasin;
+    dusmanAtesEtmeAraligi = sf::milliseconds(2000);
+    sonDusmanAtesZamani = dusmanZamanlayici.getElapsedTime();
+    dusmanlariOlustur(yukaridanBaslasin ? -650.f : 0.f);
+}
+
 
 void enemy::dusmanlariOlustur(float yBaslangicFarki) {
     dusmanlar.clear();
@@ -140,14 +150,17 @@ void enemy::hizGuncelle() {
 
 
 //  HAREKET
-void enemy::dusmanHareketi(engel& engeller){
+bool enemy::dusmanHareketi(engel& engeller){
+    bool yeniDalgaBasladi = false;
+
     if (dusmanlar.empty()) {
         yeniDalgaBaslat();
+        yeniDalgaBasladi = true;
     }
 
     if (dalgaIniyorMu) {
         dalgaInisiniGuncelle();
-        return;
+        return yeniDalgaBasladi;
     }
 
     hizGuncelle();
@@ -194,15 +207,18 @@ void enemy::dusmanHareketi(engel& engeller){
         
     }
     asagiIn = false;
+
+    return yeniDalgaBasladi;
 }
 
 // DUSMAN MERMİSİ
 
-void enemy::dusmanAtesi() {
+bool enemy::dusmanAtesi() {
     if (dalgaIniyorMu)
-        return;
+        return false;
 
     sf::Time simdikiZaman = dusmanZamanlayici.getElapsedTime();
+    bool atesEdildi = false;
 
     if (!dusmanlar.empty() && simdikiZaman - sonDusmanAtesZamani >= dusmanAtesEtmeAraligi) {
         int atesEdenDusmanSayisi = rand() % 3 + 1;
@@ -235,6 +251,7 @@ void enemy::dusmanAtesi() {
             });
 
             dusmanMermileri.push_back(dusmanMermisi);
+            atesEdildi = true;
         }
 
         sonDusmanAtesZamani = simdikiZaman;
@@ -249,6 +266,8 @@ void enemy::dusmanAtesi() {
             i--;
         }
     }
+
+    return atesEdildi;
 }
 
 

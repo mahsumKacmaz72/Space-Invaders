@@ -5,7 +5,13 @@ bullet::bullet() :mermiResmi("C:\\Space Invaders\\assets\\images\\mermi1.png"), 
 	//mermi.setColor(sf::Color::Green);
 }
 
-void bullet::mermiAtesleme(sf::Vector2f gemiKonumu){
+void bullet::sifirla() {
+	sarjor.clear();
+	sonAtesZamani = sf::Time::Zero;
+	zamanlayici.restart();
+}
+
+bool bullet::mermiAtesleme(sf::Vector2f gemiKonumu){
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Space)) {
 		sf::Time simdikiZaman = zamanlayici.getElapsedTime();
@@ -14,8 +20,11 @@ void bullet::mermiAtesleme(sf::Vector2f gemiKonumu){
 			mermi.setPosition({gemiKonumu.x-17.f , gemiKonumu.y});
 			sarjor.push_back(mermi);
 			sonAtesZamani = simdikiZaman;
+			return true;
 		}
 	}
+
+	return false;
 }
 
 void bullet::sarjorYenileme(sf::Vector2f gemiKonumu){

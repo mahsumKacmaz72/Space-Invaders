@@ -10,7 +10,7 @@ class engel;
 
 class enemy {
 private:
-	friend class carpismaDenetimi;
+	friend class				carpismaDenetimi;
 
 	sf::Texture					dusmanResmi;
 	sf::Texture					dusmanResmi1;
@@ -43,9 +43,10 @@ private:
 
 public:
 	enemy(int dusmanSecici);
+	void sifirla(bool yukaridanBaslasin);
 	void hizGuncelle();
-	void dusmanHareketi(engel& engeller);
-	void dusmanAtesi();
+	bool dusmanHareketi(engel& engeller);
+	bool dusmanAtesi();
 	void ciz(sf::RenderWindow& pencere);
 	void dusmanMermiCiz(sf::RenderWindow& pencere);
 };

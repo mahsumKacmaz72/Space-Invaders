@@ -19,7 +19,8 @@ private:
 public:
 	bullet();
 
-	void mermiAtesleme(sf::Vector2f gemiKonumu);
+	void sifirla();
+	bool mermiAtesleme(sf::Vector2f gemiKonumu);
 	void sarjorYenileme(sf::Vector2f gemiKonumu);
 	void ciz(sf::RenderWindow& pencere);
 

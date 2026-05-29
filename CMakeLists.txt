@@ -17,7 +17,7 @@ if(MINGW AND EXISTS "${SFML_ROOT}/lib/sfml-graphics.lib" AND NOT EXISTS "${SFML_
     )
 endif()
 
-find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System Audio)
 
 add_executable(SpaceInvaders
     main.cpp
@@ -32,6 +32,7 @@ target_link_libraries(SpaceInvaders PRIVATE
     SFML::Graphics
     SFML::Window
     SFML::System
+    SFML::Audio
 )
 
 if(WIN32)

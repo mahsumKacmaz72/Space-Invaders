@@ -8,6 +8,14 @@ oyuncu::oyuncu():gemiResmi("C:\\Space Invaders\\assets\\images\\uzayGemisi2.png"
 	gemiBoyutu = 130.f;	
 }
 
+void oyuncu::sifirla() {
+	gemi.setPosition({ 850,1475 });
+	gemiSilindiMi = false;
+	gemiGeciciGizliMi = false;
+	can = 3;
+	gizlenmeZamanlayici.restart();
+}
+
 
 
 

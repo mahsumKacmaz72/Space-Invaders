@@ -22,33 +22,45 @@ int carpismaDenetimi::oyuncuMermiDusmanCarpisma(enemy& dusman, bullet& mermi){
 	return kazanilanPuan;
 }
 
-void carpismaDenetimi::dusmanMermiOyuncuCarpisma(enemy& dusman, oyuncu& gemi) {
+bool carpismaDenetimi::dusmanMermiOyuncuCarpisma(enemy& dusman, oyuncu& gemi) {
 	if (gemi.gemiSilindiMi || gemi.gemiGeciciGizliMi)
-		return;
+		return false;
 
 	for (int i = 0; i < static_cast<int>(dusman.dusmanMermileri.size()); i++) {
 		if (dusman.dusmanMermileri[i].getGlobalBounds().findIntersection(gemi.gemi.getGlobalBounds())) {
 			dusman.dusmanMermileri.erase(dusman.dusmanMermileri.begin() + i);
 			gemi.hasarAl();
-			return;
+			return true;
 		}
 	}
+
+	return false;
 }
 
-void carpismaDenetimi::oyuncuMermiEngelCarpisma(bullet& mermi, engel& engeller) {
+bool carpismaDenetimi::oyuncuMermiEngelCarpisma(bullet& mermi, engel& engeller) {
+	bool carpismaOldu = false;
+
 	for (int i = 0; i < static_cast<int>(mermi.sarjor.size()); i++) {
 		if (engeller.mermiCarpincaHasarAl(mermi.sarjor[i].getGlobalBounds(), true)) {
 			mermi.sarjor.erase(mermi.sarjor.begin() + i);
 			i--;
+			carpismaOldu = true;
 		}
 	}
+
+	return carpismaOldu;
 }
 
-void carpismaDenetimi::dusmanMermiEngelCarpisma(enemy& dusman, engel& engeller) {
+bool carpismaDenetimi::dusmanMermiEngelCarpisma(enemy& dusman, engel& engeller) {
+	bool carpismaOldu = false;
+
 	for (int i = 0; i < static_cast<int>(dusman.dusmanMermileri.size()); i++) {
 		if (engeller.mermiCarpincaHasarAl(dusman.dusmanMermileri[i].getGlobalBounds(), false)) {
 			dusman.dusmanMermileri.erase(dusman.dusmanMermileri.begin() + i);
 			i--;
+			carpismaOldu = true;
 		}
 	}
+
+	return carpismaOldu;
 }

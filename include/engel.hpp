@@ -13,6 +13,7 @@ private:
 public:
 	engel();
 
+	void sifirla();
 	bool mermiCarpincaHasarAl(sf::FloatRect mermiSinirlari, bool oyuncuMermisiMi);
 	bool dusmanAsagiInerseCarpisir(sf::FloatRect dusmanSinirlari, float asagiMiktari);
 	void ciz(sf::RenderWindow& pencere);

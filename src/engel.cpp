@@ -1,6 +1,11 @@
 #include "C:\\Space Invaders\\include\\engel.hpp"
 
 engel::engel() {
+	sifirla();
+}
+
+void engel::sifirla() {
+	engelParcalari.clear();
 	engelOlustur(230.f, 1240.f);
 	engelOlustur(635.f, 1240.f);
 	engelOlustur(1040.f, 1240.f);
