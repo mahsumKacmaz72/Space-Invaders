@@ -25,12 +25,12 @@ void oyuncu::hareketEt() {
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left)){ 
 		if(gemi.getPosition().x >= 10)
-			gemi.move({ -10.f, 0 });
+			gemi.move({ -13.f, 0 });
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right)){ 
 		if(gemi.getPosition().x + gemiBoyutu <= 1810)
-			gemi.move({ 10.f, 0 });
+			gemi.move({ 13.f, 0 });
 	}
 }
 

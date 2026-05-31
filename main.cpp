@@ -3,6 +3,7 @@
 #include "C:\\Space Invaders\\include\\oyuncu.hpp"
 #include "C:\\Space Invaders\\include\\mermi.hpp"
 #include "C:\\Space Invaders\\include\\dusman.hpp"
+#include "C:\\Space Invaders\\include\\ufo.hpp"
 #include "C:\\Space Invaders\\include\\carpismaDenetimi.hpp"
 #include "C:\\Space Invaders\\include\\engel.hpp"
 #include <string>
@@ -21,6 +22,7 @@ int main() {
 	oyuncu gemi;
 	bullet mermi;
 	enemy dusman(a);
+	ufo bonusUfo;
 	carpismaDenetimi carpisma;
 	engel engeller;
 	int skor = 0;
@@ -107,6 +109,7 @@ int main() {
 		gemi.sifirla();
 		mermi.sifirla();
 		dusman.sifirla(true);
+		bonusUfo.sifirla();
 		engeller.sifirla();
 		skor = 0;
 		skorYazisi.setString("Score: 0");
@@ -180,6 +183,8 @@ int main() {
 			}
 
 			mermi.sarjorYenileme(gemi.gemiKonumu());
+			bonusUfo.guncelle();
+
 			if (dusman.dusmanHareketi(engeller))
 				dalgaSesi.play();
 
@@ -193,6 +198,13 @@ int main() {
 			skor += kazanilanPuan;
 			skorYazisi.setString("Score: " + std::to_string(skor));
 
+			int ufoPuani = carpisma.oyuncuMermiUfoCarpisma(bonusUfo, mermi);
+			if (ufoPuani > 0) {
+				skor += ufoPuani;
+				skorYazisi.setString("Score: " + std::to_string(skor));
+				dusmanVurulmaSesi.play();
+			}
+
 			if (carpisma.oyuncuMermiEngelCarpisma(mermi, engeller))
 				engelVurulmaSesi.play();
 
@@ -202,7 +214,7 @@ int main() {
 			if (carpisma.dusmanMermiOyuncuCarpisma(dusman, gemi))
 				oyuncuHasarSesi.play();
 
-			if (gemi.canSayisi() <= 0) {
+			if (gemi.canSayisi() <= 0 || dusman.pencereAltinaDegdiMi(1600.f)) {
 				finalSkorYazisi.setString("Skor: " + std::to_string(skor));
 				ortala(finalSkorYazisi, 900.f, 725.f);
 				oyunDurumu = OyunDurumu::Sonuc;
@@ -223,6 +235,7 @@ int main() {
 		}
 		else {
 			dusman.dusmanMermiCiz(pencere);
+			bonusUfo.ciz(pencere);
 			dusman.ciz(pencere);
 			engeller.ciz(pencere);
 			mermi.ciz(pencere);

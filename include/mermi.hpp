@@ -14,7 +14,7 @@ private:
 	sf::Time				atesEtmeAraligi = sf::milliseconds(700);
 	sf::Time				sonAtesZamani = sf::Time::Zero;
 	std::vector<sf::Sprite> sarjor;
-	float					mermiHizi = 15.0f;
+	float					mermiHizi = 20.0f;
 
 public:
 	bullet();

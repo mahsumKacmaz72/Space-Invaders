@@ -47,6 +47,7 @@ public:
 	void hizGuncelle();
 	bool dusmanHareketi(engel& engeller);
 	bool dusmanAtesi();
+	bool pencereAltinaDegdiMi(float pencereYuksekligi);
 	void ciz(sf::RenderWindow& pencere);
 	void dusmanMermiCiz(sf::RenderWindow& pencere);
 };
