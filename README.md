@@ -40,7 +40,7 @@ Space Invaders
 
 ## Kullanilan Sesler
 
-Ses dosyalari `assets/sounds` klasorundedir. Dosya adlarini Turkce tuttum:
+Ses dosyalari `assets/sounds` klasorundedir:
 
 - `arka_plan.wav`
 - `oyuncu_ates.wav`

@@ -25,6 +25,7 @@ add_executable(SpaceInvaders
     "include/oyuncu.hpp" "src/oyuncu.cpp"
     "include/mermi.hpp"  "src/mermi.cpp"
     "include/dusman.hpp"  "src/dusman.cpp" 
+    "include/ufo.hpp"  "src/ufo.cpp"
     "include/engel.hpp"  "src/engel.cpp"
     "include/carpismaDenetimi.hpp"  "src/carpismaDenetimi.cpp")
 

@@ -273,6 +273,16 @@ bool enemy::dusmanAtesi() {
 
 
 // ÇİZİM
+bool enemy::pencereAltinaDegdiMi(float pencereYuksekligi) {
+    for (const auto& d : dusmanlar) {
+        sf::FloatRect sinirlar = d.getGlobalBounds();
+        if (sinirlar.position.y + sinirlar.size.y >= pencereYuksekligi)
+            return true;
+    }
+
+    return false;
+}
+
 void enemy::ciz(sf::RenderWindow& pencere) {
     for (const auto& d : dusmanlar) {
         pencere.draw(d);

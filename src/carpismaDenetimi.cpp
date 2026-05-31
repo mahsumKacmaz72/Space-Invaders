@@ -22,6 +22,22 @@ int carpismaDenetimi::oyuncuMermiDusmanCarpisma(enemy& dusman, bullet& mermi){
 	return kazanilanPuan;
 }
 
+int carpismaDenetimi::oyuncuMermiUfoCarpisma(ufo& bonusUfo, bullet& mermi) {
+	if (!bonusUfo.aktifMi)
+		return 0;
+
+	for (int i = 0; i < static_cast<int>(mermi.sarjor.size()); i++) {
+		if (mermi.sarjor[i].getGlobalBounds().findIntersection(bonusUfo.ufoGemisi.getGlobalBounds())) {
+			mermi.sarjor.erase(mermi.sarjor.begin() + i);
+			bonusUfo.aktifMi = false;
+			bonusUfo.sonrakiCikisSuresiniAyarla();
+			return 300;
+		}
+	}
+
+	return 0;
+}
+
 bool carpismaDenetimi::dusmanMermiOyuncuCarpisma(enemy& dusman, oyuncu& gemi) {
 	if (gemi.gemiSilindiMi || gemi.gemiGeciciGizliMi)
 		return false;
