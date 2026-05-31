@@ -2,7 +2,6 @@
 .vs/
 
 # CMake build outputs
-build/
 build-*/
 CMakeFiles/
 CMakeCache.txt
